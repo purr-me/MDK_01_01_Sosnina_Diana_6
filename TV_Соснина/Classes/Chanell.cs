@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace TV_Соснина.Classes
 {
-    public class Channel
+    public class Chanell
     {
-        public string name {  get; set; }
+        public string Name {  get; set; }
         public string Src { get; set; }
     }
 }
