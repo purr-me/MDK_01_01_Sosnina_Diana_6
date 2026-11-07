@@ -33,18 +33,18 @@ namespace TV_Соснина.Classes
         {
             AllChanells.Add(new Chanell()
             {
-                Name = "Практическое занятие №3.",
-                Src = ""
+                Name = "Эдит Том Холланд",
+                Src = @"D:\3 курс\МДК 01.01 Ощепков\Том.mp4"
             });
             AllChanells.Add(new Chanell()
             {
-                Name = "Практическое занятие №4.",
-                Src = ""
+                Name = "Эдит Тоби Магуайр",
+                Src = @"D:\3 курс\МДК 01.01 Ощепков\Тоби.mp4"
             });
             AllChanells.Add(new Chanell()
             {
-                Name = "Практическое занятие №5.",
-                Src = ""
+                Name = "Эдит Эндрю Гарфилд",
+                Src = @"D:\3 курс\МДК 01.01 Ощепков\Эндрю.mp4"
             });
         }
 
