@@ -67,9 +67,9 @@ namespace TV_Соснина.Classes
                     To = 1,
                     Duration = TimeSpan.FromSeconds(0.6)
                 };
-                mediaElement.BeginAnimation(MediaElement.OpacityMaskProperty, endAnimation);
+                mediaElement.BeginAnimation(MediaElement.OpacityProperty, endAnimation);
             };
-            mediaElement.BeginAnimation(MediaElement.OpacityMaskProperty, startAnimation);
+            mediaElement.BeginAnimation(MediaElement.OpacityProperty, startAnimation);
             nameChanell.Content = AllChanells[activeChanell].Name;
         }
 
