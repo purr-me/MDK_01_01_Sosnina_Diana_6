@@ -43,7 +43,8 @@
                 Margin="115,0,0,10"
                 Background="White"/>
             <Button 
-                Content="Тише"
+                Click="BackProgramClick"
+                Content="Пред. передача"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Width="100"
@@ -51,12 +52,32 @@
                 Margin="0,0,115,10"
                 Background="White"/>
             <Button 
-                Content="Громче"
+                Click="NextProgramClick"
+                Content="След. передача"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom"
                 Width="100"
                 Height="25"
                 Margin="0,0,10,10"
+                Background="White"/>
+
+            <TextBox
+                x:Name="ChannelNumber"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Width="60"
+                Height="25"
+                Margin="-200,0,0,10"
+                TextAlignment="Center"
+                VerticalContentAlignment="Center"/>
+            <Button
+                Click="GoTo"
+                Content="Перейти"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Bottom"
+                Width="80"
+                Height="25"
+                Margin="0,0,0,10"
                 Background="White"/>
         </Grid>
     </Grid>

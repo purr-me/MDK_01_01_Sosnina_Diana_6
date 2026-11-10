@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace TV_Соснина.Classes
 {
@@ -12,6 +13,13 @@ namespace TV_Соснина.Classes
     {
         private int activeChanell;
         private int activeVolume;
+
+        private int activeVideo = 0;
+
+        private DispatcherTimer timer;
+        private MediaElement mediaElement;
+        private Label nameChanell;
+
 
         public int ActiveChanell
         {
@@ -31,22 +39,41 @@ namespace TV_Соснина.Classes
 
         public TV()
         {
-            AllChanells.Add(new Chanell()
-            {
-                Name = "Эдит Том Холланд",
-                Src = @"D:\3 курс\МДК 01.01 Ощепков\Том.mp4"
-            });
-            AllChanells.Add(new Chanell()
-            {
-                Name = "Эдит Тоби Магуайр",
-                Src = @"D:\3 курс\МДК 01.01 Ощепков\Тоби.mp4"
-            });
-            AllChanells.Add(new Chanell()
-            {
-                Name = "Эдит Эндрю Гарфилд",
-                Src = @"D:\3 курс\МДК 01.01 Ощепков\Эндрю.mp4"
-            });
+            Chanell ch1 = new Chanell() { Name = "Канал: Человек-паук" };
+            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Том.mp4");
+            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Тоби.mp4");
+            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Эндрю.mp4");
+            AllChanells.Add(ch1);
+
+            Chanell ch2 = new Chanell() { Name = "Канал: Гарри Поттер" };
+            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Гарри.mp4");
+            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Рон.mp4");
+            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Гермиона.mp4");
+            AllChanells.Add(ch2);
+
+
+
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(11);
+            timer.Tick += TimerTick;
         }
+
+
+
+        private void TimerTick(object sender, EventArgs e)
+        {
+            NextChanell(mediaElement, nameChanell);
+        }
+
+        public void StartTimer(MediaElement media, Label label)
+        {
+            mediaElement = media;
+            nameChanell = label;
+            //timer.Start();
+        }
+
+
+
 
         public void SwapChanell (MediaElement mediaElement, Label nameChanell)
         {
@@ -58,7 +85,8 @@ namespace TV_Соснина.Classes
             };
             startAnimation.Completed += delegate
             {
-                mediaElement.Source = new Uri(AllChanells[activeChanell].Src);
+                string videoPath = AllChanells[activeChanell].Videos[activeVideo];
+                mediaElement.Source = new Uri(videoPath);
                 mediaElement.Play();
 
                 DoubleAnimation endAnimation = new DoubleAnimation()
@@ -83,6 +111,19 @@ namespace TV_Соснина.Classes
             activeChanell--;
             SwapChanell(mediaElement, nameChanell);
         }
+
+
+        public void GoChanell(int channelNumber, MediaElement mediaElement, Label nameChanell)
+        {
+            if (channelNumber >= 1 && channelNumber <= AllChanells.Count)
+            {
+                activeChanell = channelNumber - 1;
+                SwapChanell(mediaElement, nameChanell);
+            }
+        }
+
+
+
         public void UpSound()
         {
 

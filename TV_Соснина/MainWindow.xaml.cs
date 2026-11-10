@@ -28,6 +28,8 @@ namespace TV_Соснина
 
             VideoPlayer.Source = new Uri(TV.AllChanells[0].Src);
             VideoPlayer.Play();
+
+            TV.StartTimer(VideoPlayer, NameChannel);
         }
 
         private void BackChannel(object sender, RoutedEventArgs e) =>
@@ -35,5 +37,23 @@ namespace TV_Соснина
 
         private void NextChannel(object sender, RoutedEventArgs e) =>
             TV.NextChanell(VideoPlayer, NameChannel);
+
+        private void GoTo(object sender, RoutedEventArgs e)
+        {
+            if (int.TryParse(ChannelNumber.Text, out int number))
+            {
+                TV.GoChanell(number, VideoPlayer, NameChannel);
+            }
+            else
+            {
+                MessageBox.Show("Введите номер канала числом!");
+            }
+        }
+
+        private void BackProgramClick(object sender, RoutedEventArgs e) => 
+            TV.BackVideo(VideoPlayer, NameChannel);
+
+        private void NextProgramClick(object sender, RoutedEventArgs e) => 
+            TV.NextVideo(VideoPlayer, NameChannel);
     }
 }

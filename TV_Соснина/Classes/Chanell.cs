@@ -9,6 +9,6 @@ namespace TV_Соснина.Classes
     public class Chanell
     {
         public string Name {  get; set; }
-        public string Src { get; set; }
+        public List<string> Videos { get; set; } = new List<string>();
     }
 }
