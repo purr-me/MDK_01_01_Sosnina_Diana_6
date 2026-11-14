@@ -26,8 +26,7 @@ namespace TV_Соснина
         {
             InitializeComponent();
 
-            VideoPlayer.Source = new Uri(TV.AllChanells[0].Src);
-            VideoPlayer.Play();
+            TV.SwapChanell(VideoPlayer, NameChannel);
 
             TV.StartTimer(VideoPlayer, NameChannel);
         }

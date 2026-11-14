@@ -40,15 +40,15 @@ namespace TV_Соснина.Classes
         public TV()
         {
             Chanell ch1 = new Chanell() { Name = "Канал: Человек-паук" };
-            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Том.mp4");
-            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Тоби.mp4");
-            ch1.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Эндрю.mp4");
+            ch1.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Том.mp4");
+            ch1.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Тоби.mp4");
+            ch1.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Эндрю.mp4");
             AllChanells.Add(ch1);
 
             Chanell ch2 = new Chanell() { Name = "Канал: Гарри Поттер" };
-            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Гарри.mp4");
-            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Рон.mp4");
-            ch2.Videos.Add(@"E:\3 курс\МДК 01.01 Ощепков\video6\Гермиона.mp4");
+            ch2.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Гарри.mp4");
+            ch2.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Драко.mp4");
+            ch2.Videos.Add(@"D:\3 курс\МДК 01.01 Ощепков\video6\Гермиона.mp4");
             AllChanells.Add(ch2);
 
 
@@ -77,6 +77,10 @@ namespace TV_Соснина.Classes
 
         public void SwapChanell (MediaElement mediaElement, Label nameChanell)
         {
+            if (activeChanell >= AllChanells.Count)
+                activeChanell = 0;
+            if (activeChanell < 0)
+                activeChanell = AllChanells.Count - 1;
             DoubleAnimation startAnimation = new DoubleAnimation()
             {
                 From = 1,
@@ -104,11 +108,13 @@ namespace TV_Соснина.Classes
         public void NextChanell(MediaElement mediaElement, Label nameChanell)
         {
             activeChanell++;
+            activeVideo = 0;
             SwapChanell(mediaElement, nameChanell);
         }
         public void BackChanell(MediaElement mediaElement, Label nameChanell)
         {
             activeChanell--;
+            activeVideo = 0;
             SwapChanell(mediaElement, nameChanell);
         }
 
@@ -118,11 +124,26 @@ namespace TV_Соснина.Classes
             if (channelNumber >= 1 && channelNumber <= AllChanells.Count)
             {
                 activeChanell = channelNumber - 1;
+                activeVideo = 0;
                 SwapChanell(mediaElement, nameChanell);
             }
         }
 
+        public void NextVideo(MediaElement mediaElement, Label nameChanell)
+        {
+            activeVideo++;
+            if(activeVideo >= AllChanells[activeChanell].Videos.Count)
+                activeVideo = 0;
+            SwapChanell(mediaElement, nameChanell);
+        }
 
+        public void BackVideo(MediaElement mediaElement, Label nameChanell)
+        {
+            activeVideo--;
+            if (activeVideo < 0)
+                activeVideo = AllChanells[activeChanell].Videos.Count - 1;
+            SwapChanell(mediaElement, nameChanell);
+        }
 
         public void UpSound()
         {
