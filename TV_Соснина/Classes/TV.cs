@@ -12,6 +12,7 @@ namespace TV_Соснина.Classes
     public class TV
     {
         private int activeChanell;
+        private int activeVolume;
 
         private int activeVideo = 0;
 
